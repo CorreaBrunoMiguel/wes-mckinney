@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "scale": {
+    "notebook_0_100": true,
+    "check_0_10": true,
+    "block_assessment_0_100": true
+  },
+  "chapters": {
+    "C03": {
+      "title": "Estruturas de dados embutidas, funções e arquivos",
+      "status": "in_progress",
+      "weights": {
+        "notebook": 0.25,
+        "check": 0.1,
+        "block_assessment": 0.5,
+        "chapter_exam_or_project": 0.15
+      },
+      "blocks": {
+        "C03B01": {
+          "title": "Estruturas de dados e sequências — Parte 1",
+          "dates": {
+            "submitted_at": "2026-01-17",
+            "graded_at": "2026-01-17"
+          },
+          "scores": {
+            "notebook": 92,
+            "check": { "score": 8, "max": 10 },
+            "block_assessment": 94
+          },
+          "notes": {
+            "strengths": [
+              "Conceitos corretos e boa sequência didática",
+              "Boa demonstração de tupla com item mutável"
+            ],
+            "gaps": [
+              "Typos/truncamentos em Markdown",
+              "Confusão inicial entre reversed/[::-1]/reverse em checagem (corrigido depois)"
+            ]
+          }
+        }
+      },
+      "chapter_exam_or_project": {
+        "status": "not_started",
+        "score": null,
+        "max": 100
+      },
+      "computed": {
+        "block_count": 1,
+        "last_updated": "2026-01-17",
+        "chapter_grade_current": null
+      }
+    }
+  }
+}
