@@ -73,3 +73,67 @@ Notas do bloco (CORE v3.0)
 - descritivas: 80/100 (convertido de 8/10)
 - avaliação_bloco: 94/100
 - final_bloco: 90/100 (0.25*92 + 0.25*80 + 0.50\*94)
+
+---
+
+### Bloco: C03B02 — Estruturas de dados e sequências (Parte 2)
+
+Status: concluído em 2026-01-20
+
+Objetivos do bloco
+
+- Modelar dados com `dict` (chave→valor) e operar com segurança (`get`, `pop` com default).
+- Iterar dicionários corretamente (`keys`, `values`, `items`) e realizar merge/atualização (`update`) entendendo sobrescrita.
+- Compreender “hashable” e restrições de chaves (imutabilidade).
+- Usar `set` para deduplicação, membership eficiente e operações de conjuntos (união, interseção, diferença, dif. simétrica).
+- Construir coleções com comprehensions (list/set/dict) e avaliar legibilidade (quando evitar aninhadas).
+- Aplicar `setdefault` e `defaultdict(list)` para padrões de agregação por chave.
+
+Tópicos e sub-tópicos
+
+1. Dicionários (dict)
+   - Criação (literal e dict(...) a partir de pares)
+   - Acesso: d[k] (KeyError) vs d.get(k, default)
+   - Inserção/atualização: d[k] = v
+   - Remoção: del, pop (com default)
+   - Iteração e visões: keys(), values(), items()
+   - Merge in-place: update (sobrescreve chaves repetidas)
+   - Construção a partir de sequências: dict(zip(keys, values)) e loop com zip
+   - Armadilha do zip: trunca no menor comprimento
+
+2. Defaults e agregação por chave
+   - setdefault(k, default) para inicializar coleções acumuladoras
+   - collections.defaultdict(list) (criação automática ao acessar chave ausente; efeito colateral de criar entradas)
+
+3. Conjuntos (set)
+   - Criação: set(iterável); literal {…}; set vazio: set()
+   - Deduplicação e membership
+   - Operações: união (|), interseção (&), diferença (-), diferença simétrica (^)
+   - Hashable: por que listas/dicts/sets não entram como elementos; uso de tuplas quando necessário
+
+4. Comprehensions
+   - List / set / dict comprehensions com filtro (if)
+   - Comprehensions aninhadas (flatten + filtro)
+   - Critérios de legibilidade: quando virar for explícito
+
+Evidências (artefatos do bloco)
+
+- Notebook: C03B02.ipynb
+- Descritivas + respostas: C03B02_DESC.ipynb
+- Avaliação do bloco + respostas: C03B02_TEST.ipynb
+- Aula/revisão/avaliação/correções: geradas no chat (C03B02)
+
+Observações de domínio
+
+- Pontos sólidos: merge/update, agrupamento por chave (setdefault/defaultdict), set para deduplicação, operações de conjunto, uso de comprehensions.
+- Atenções recorrentes:
+  - Merge sem modificar original: ordem importa (ex.: a | b).
+  - Membership: set é O(1) médio; list é O(n).
+  - Legibilidade: definir critérios objetivos para não exagerar em comprehensions aninhadas.
+
+Notas do bloco (CORE v3.0)
+
+- notebook: 91/100
+- descritivas: 73/100
+- avaliação_bloco: 90/100
+- final_bloco: 86/100 (0.25*91 + 0.25*73 + 0.50\*90)

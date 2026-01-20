@@ -50,12 +50,49 @@
               "Fixar diferenças: reversed(seq) (iterador) vs seq[::-1] (cópia) vs seq.reverse() (in-place)"
             ]
           }
+        },
+        "C03B02": {
+          "title": "Estruturas de dados e sequências — Parte 2",
+          "dates": {
+            "submitted_at": "2026-01-20",
+            "graded_at": "2026-01-20"
+          },
+          "scores": {
+            "notebook": 91,
+            "descritivas": 73,
+            "avaliacao_bloco": 90,
+            "final_bloco": 86
+          },
+          "evidence": {
+            "notebook_file": "C03B02.ipynb",
+            "descritivas_solution_file": "C03B02_DESC.ipynb",
+            "assessment_solution_file": "C03B02_TEST.ipynb",
+            "chat_artifacts": [
+              "Aula didática (C03B02)",
+              "Correção descritivas + NotaDescritivas (C03B02)",
+              "Revisão técnica + NotaNotebook (C03B02)",
+              "Avaliação do bloco (C03B02)",
+              "Correção da avaliação + nota (C03B02)"
+            ]
+          },
+          "notes": {
+            "strengths": [
+              "Boa cobertura de dict/set/comprehensions",
+              "Uso correto de setdefault/defaultdict para agregação",
+              "Operações de conjunto e construção com zip bem aplicadas"
+            ],
+            "gaps": [
+              "Merge sem modificar original: ordem importa (a | b)",
+              "Explicitar complexidade: membership em set é O(1) médio vs list O(n)",
+              "Critérios objetivos de legibilidade para comprehensions (especialmente aninhadas)"
+            ]
+          }
         }
       },
       "computed": {
-        "block_count": 1,
-        "chapter_grade_current": 90,
-        "last_updated": "2026-01-18"
+        "block_count": 2,
+        "chapter_grade_current": 88,
+        "last_updated": "2026-01-20"
       }
     }
   }
