@@ -1,0 +1,11 @@
+<div style="border:2px solid #28a745; padding:10px; background-color:#d4edda; border-radius:5px;">
+💡 <b>Sugestão:</b> 
+</div>
+
+<div style="border:2px solid #17a2b8; padding:10px; background-color:#d1ecf1; border-radius:5px;">
+🔎 <b>Observação:</b>
+</div>
+
+<div style="border:2px solid #ffc107; padding:10px; background-color:#fff3cd; border-radius:5px;">
+⚠️ <b>Aviso:</b> 
+</div>

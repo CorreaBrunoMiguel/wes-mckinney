@@ -40,7 +40,7 @@ Para trabalhar um capítulo (no encerramento):
 - É o catálogo oficial do que foi estudado e do que pode ser cobrado.
 - Cada bloco concluído adiciona uma entrada padronizada.
 
-4.2) boletim_notas.json (oficial)
+  4.2) boletim_notas.json (oficial)
 
 - Registro numérico e auditável de notas (por bloco e por capítulo), incluindo pesos e cálculos.
 - Mantém histórico mínimo: datas, notas por componente e notas finais calculadas.
@@ -142,9 +142,9 @@ Cada bloco tem 3 componentes (sempre):
 
 Fórmula:
 
-- NotaFinalBloco = 0.25 * NotaNotebook + 0.25 * NotaDescritivas + 0.50 * NotaAvaliacaoBloco
+- NotaFinalBloco = 0.25 _ NotaNotebook + 0.25 _ NotaDescritivas + 0.50 \* NotaAvaliacaoBloco
 
-7.2) Nota final do capítulo (0–100)
+  7.2) Nota final do capítulo (0–100)
 
 Componentes:
 
@@ -153,7 +153,7 @@ Componentes:
 
 Fórmula:
 
-- NotaFinalCapitulo = 0.50 * MediaBlocos + 0.50 * NotaAvaliacaoFinalCapitulo
+- NotaFinalCapitulo = 0.50 _ MediaBlocos + 0.50 _ NotaAvaliacaoFinalCapitulo
 
 ## 8) Regras de correção (padrão)
 
@@ -223,10 +223,10 @@ Exemplo mínimo (ilustrativo):
 ```json
 {
   "schema_version": "3.0",
-  "scale": {"min": 0, "max": 100},
+  "scale": { "min": 0, "max": 100 },
   "weights": {
-    "block_final": {"notebook": 0.25, "descriptive": 0.25, "block_exam": 0.50},
-    "chapter_final": {"blocks_avg": 0.50, "chapter_exam": 0.50}
+    "block_final": { "notebook": 0.25, "descriptive": 0.25, "block_exam": 0.5 },
+    "chapter_final": { "blocks_avg": 0.5, "chapter_exam": 0.5 }
   },
   "chapters": [
     {
@@ -236,12 +236,12 @@ Exemplo mínimo (ilustrativo):
         {
           "id": "C03B01",
           "title": "",
-          "scores": {"notebook": 0, "descriptive": 0, "block_exam": 0},
-          "computed": {"block_final": 0}
+          "scores": { "notebook": 0, "descriptive": 0, "block_exam": 0 },
+          "computed": { "block_final": 0 }
         }
       ],
-      "chapter_exam": {"score": 0, "date": ""},
-      "computed": {"blocks_avg": 0, "chapter_final": 0}
+      "chapter_exam": { "score": 0, "date": "" },
+      "computed": { "blocks_avg": 0, "chapter_final": 0 }
     }
   ]
 }
@@ -281,4 +281,3 @@ Etapa C7 — Atualização final do boletim
   - nota da avaliação final do capítulo;
   - média dos blocos;
   - nota final do capítulo (cálculo).
-

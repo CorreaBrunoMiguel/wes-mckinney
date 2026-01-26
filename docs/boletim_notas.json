@@ -1,98 +1,73 @@
 {
-  "schema_version": "3.0.0",
-  "scale": {
-    "notebook_0_100": true,
-    "descritivas_0_100": true,
-    "avaliacao_bloco_0_100": true
+  "schema_version": "4.0.0",
+  "grading_policy": {
+    "block_weights": { "B1": 0.25, "B4": 0.3, "B7": 0.45 },
+    "chapter_weights": { "blocks": 0.6, "chapter_exam": 0.4 },
+    "chapter_block_aggregation": "mean_equal_weight"
+  },
+  "summary": {
+    "current_chapter": "C03",
+    "overall": {
+      "chapters_completed": 0,
+      "chapters_in_progress": 1
+    }
   },
   "chapters": {
     "C03": {
-      "title": "Estruturas de dados embutidas, funções e arquivos",
-      "status": "in_progress",
-      "weights": {
-        "notebook": 0.25,
-        "descritivas": 0.25,
-        "avaliacao_bloco": 0.5
-      },
+      "weights": { "notebook": 0.25, "descritivas": 0.3, "avaliacao_bloco": 0.45 },
       "blocks": {
         "C03B01": {
-          "title": "Estruturas de dados e sequências — Parte 1",
-          "dates": {
-            "submitted_at": "2026-01-17",
-            "graded_at": "2026-01-17"
-          },
           "scores": {
             "notebook": 92,
             "descritivas": 80,
             "avaliacao_bloco": 94,
-            "final_bloco": 90
+            "final_bloco": 89
           },
-          "evidence": {
-            "notebook_file": "C03B01.ipynb",
-            "assessment_solution_file": "C03B01_TEST.ipynb",
-            "chat_artifacts": [
-              "Aula didática (C03B01)",
-              "Revisão técnica + nota (C03B01)",
-              "Avaliação do bloco (C03B01)",
-              "Correção da avaliação + nota (C03B01)"
-            ]
+          "artifacts": {
+            "main": "C03B01.ipynb",
+            "desc": "C03B01_DESC.ipynb",
+            "test": "C03B01_TEST.ipynb"
           },
-          "notes": {
-            "strengths": [
-              "Conceitos corretos e boa sequência didática",
-              "Boa demonstração de tupla com item mutável",
-              "Unpacking e slices bem aplicados",
-              "Uso adequado de zip/unzip e bisect/insort"
-            ],
-            "gaps": [
-              "Typos/truncamentos em Markdown (editorial)",
-              "Manter dados do enunciado sem alterar em exercícios",
-              "Fixar diferenças: reversed(seq) (iterador) vs seq[::-1] (cópia) vs seq.reverse() (in-place)"
-            ]
-          }
+          "status": "done"
         },
         "C03B02": {
-          "title": "Estruturas de dados e sequências — Parte 2",
-          "dates": {
-            "submitted_at": "2026-01-20",
-            "graded_at": "2026-01-20"
-          },
           "scores": {
             "notebook": 91,
             "descritivas": 73,
             "avaliacao_bloco": 90,
-            "final_bloco": 86
+            "final_bloco": 85
           },
-          "evidence": {
-            "notebook_file": "C03B02.ipynb",
-            "descritivas_solution_file": "C03B02_DESC.ipynb",
-            "assessment_solution_file": "C03B02_TEST.ipynb",
-            "chat_artifacts": [
-              "Aula didática (C03B02)",
-              "Correção descritivas + NotaDescritivas (C03B02)",
-              "Revisão técnica + NotaNotebook (C03B02)",
-              "Avaliação do bloco (C03B02)",
-              "Correção da avaliação + nota (C03B02)"
-            ]
+          "artifacts": {
+            "main": "C03B02.ipynb",
+            "desc": "C03B02_DESC.ipynb",
+            "test": "C03B02_TEST.ipynb"
           },
-          "notes": {
-            "strengths": [
-              "Boa cobertura de dict/set/comprehensions",
-              "Uso correto de setdefault/defaultdict para agregação",
-              "Operações de conjunto e construção com zip bem aplicadas"
-            ],
-            "gaps": [
-              "Merge sem modificar original: ordem importa (a | b)",
-              "Explicitar complexidade: membership em set é O(1) médio vs list O(n)",
-              "Critérios objetivos de legibilidade para comprehensions (especialmente aninhadas)"
-            ]
-          }
+          "status": "done"
+        },
+        "C03B03": {
+          "scores": {
+            "notebook": 83,
+            "descritivas": 77,
+            "avaliacao_bloco": 68,
+            "final_bloco": 74
+          },
+          "artifacts": {
+            "main": "C03B03.ipynb",
+            "desc": "C03B03_DESC.ipynb",
+            "test": "C03B03_TEST.ipynb"
+          },
+          "status": "done"
         }
       },
+      "chapter_exam": {
+        "score": null,
+        "status": "not_started"
+      },
       "computed": {
-        "block_count": 2,
-        "chapter_grade_current": 88,
-        "last_updated": "2026-01-20"
+        "block_count": 3,
+        "block_grade": 83,
+        "chapter_final_grade": null,
+        "last_updated": "2026-01-25"
       }
     }
   }
