@@ -15,8 +15,8 @@
   "summary": {
     "current_chapter": "C03",
     "overall": {
-      "chapters_completed": 0,
-      "chapters_in_progress": 1
+      "chapters_completed": 1,
+      "chapters_in_progress": 0
     }
   },
   "chapters": {
@@ -85,13 +85,13 @@
         }
       },
       "chapter_exam": {
-        "score": null,
-        "status": "not_started"
+        "score": 77,
+        "status": "done"
       },
       "computed": {
         "block_count": 4,
         "block_grade": 82,
-        "chapter_final_grade": null,
+        "chapter_final_grade": 80,
         "last_updated": "2026-01-27"
       }
     }
