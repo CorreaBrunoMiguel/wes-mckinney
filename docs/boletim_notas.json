@@ -1,8 +1,15 @@
 {
   "schema_version": "4.0.0",
   "grading_policy": {
-    "block_weights": { "B1": 0.25, "B4": 0.3, "B7": 0.45 },
-    "chapter_weights": { "blocks": 0.6, "chapter_exam": 0.4 },
+    "block_weights": {
+      "B1": 0.25,
+      "B4": 0.3,
+      "B7": 0.45
+    },
+    "chapter_weights": {
+      "blocks": 0.6,
+      "chapter_exam": 0.4
+    },
     "chapter_block_aggregation": "mean_equal_weight"
   },
   "summary": {
@@ -14,7 +21,11 @@
   },
   "chapters": {
     "C03": {
-      "weights": { "notebook": 0.25, "descritivas": 0.3, "avaliacao_bloco": 0.45 },
+      "weights": {
+        "notebook": 0.25,
+        "descritivas": 0.3,
+        "avaliacao_bloco": 0.45
+      },
       "blocks": {
         "C03B01": {
           "scores": {
@@ -57,6 +68,20 @@
             "test": "C03B03_TEST.ipynb"
           },
           "status": "done"
+        },
+        "C03B04": {
+          "scores": {
+            "notebook": 84,
+            "descritivas": 74,
+            "avaliacao_bloco": 85,
+            "final_bloco": 81
+          },
+          "artifacts": {
+            "main": "C03B04.ipynb",
+            "desc": "C03B04_DESC.ipynb",
+            "test": "C03B04_TEST.ipynb"
+          },
+          "status": "done"
         }
       },
       "chapter_exam": {
@@ -64,10 +89,10 @@
         "status": "not_started"
       },
       "computed": {
-        "block_count": 3,
-        "block_grade": 83,
+        "block_count": 4,
+        "block_grade": 82,
         "chapter_final_grade": null,
-        "last_updated": "2026-01-25"
+        "last_updated": "2026-01-27"
       }
     }
   }

@@ -172,3 +172,67 @@ Observações de domínio
   - Iteradores/geradores são consumíveis (exaurem após consumo); para reutilizar, recriar iterador ou materializar dados.
   - Ordenação com desempate: chave composta (tupla), ex.: `(idade, nome)`.
   - Capturar exceções específicas (ex.: `ValueError`) evita mascarar bugs.
+
+---
+
+### Bloco: C03B04 — Arquivos e I/O (introdução)
+
+Status: concluído em 2026-01-27
+
+Objetivos do bloco
+
+- Abrir arquivos com `open()` e escolher corretamente o modo (`r`, `w`, `x`, `a`, e variações com `+`).
+- Diferenciar modo texto vs binário (`str`/`bytes`) e entender o papel de `encoding`.
+- Ler e escrever arquivos usando `read`, `read(n)`, iteração por linhas, `write` e `writelines`.
+- Usar `with` para garantir fechamento/flush mesmo em caso de exceção.
+- Usar `seek`/`tell` com entendimento correto (principalmente em modo binário).
+- Reconhecer exceções comuns de I/O e aplicar tratamento específico quando necessário.
+- Tornar notebooks reprodutíveis quando dependem de arquivos/dados externos.
+
+Tópicos e sub-tópicos
+
+1. Abertura de arquivos
+   - `open(path, mode=..., encoding=...)`
+   - Modos: `r`, `w`, `x`, `a`, `r+`, `w+`, `a+`
+2. Texto vs binário
+   - Texto (`"r"`, `"w"`): `str` + decode/encode via `encoding`
+   - Binário (`"rb"`, `"wb"`): `bytes` sem encoding/decoding
+3. Leitura
+   - `read()`, `read(n)`, `readline()`, `readlines()`
+   - Iteração eficiente: `for line in f`
+   - Limpeza de linha: `rstrip("\n")` vs `rstrip()` vs `strip()`
+4. Escrita
+   - `write()` e `writelines()` (não adicionam `\n`)
+   - Flush e fechamento via `with`
+5. Posição no arquivo
+   - `tell()` e `seek(offset, whence)`; `whence` 0/1/2
+   - Diferenças práticas entre modo texto e binário
+6. Exceções comuns
+   - `FileNotFoundError`, `PermissionError`, `UnicodeDecodeError`, `FileExistsError`
+7. Reprodutibilidade
+   - Declarar pré-requisitos (arquivos/diretórios)
+   - Checar e criar diretório `data/` quando necessário
+   - Prover dataset mínimo ou instruções de obtenção
+
+Evidências (artefatos do bloco)
+
+- Notebook: C03B04.ipynb
+- Descritivas + respostas: C03B04_DESC.ipynb
+- Avaliação do bloco + respostas: C03B04_TEST.ipynb
+- Arquivos de apoio (pré-requisitos): `data/segismundo.txt`
+
+Observações de domínio
+
+- Atenções recorrentes:
+  - `write`/`writelines` não inserem newline; inserir `\n` manualmente quando o formato depende de linhas.
+  - `tell/seek` em texto pode ser “opaco”; para offset em bytes, demonstrar em `rb`.
+  - Declarar pré-requisitos evita “notebook funciona só na minha máquina”.
+
+---
+
+## Conteúdos já aprendidos — consolidado até C03B04
+
+- C03B01: tuplas vs listas; unpacking; operações e slicing de listas; enumerate/zip/reversed; bisect/insort.
+- C03B02: dict (get/pop/iteração/update); hashable; set (operações e membership); comprehensions; setdefault/defaultdict para agregação.
+- C03B03: LEGB e shadowing; funções como objetos (key=); lambda e critérios; partial; iterável vs iterador; geradores; itertools (groupby + ordenação); try/except/else/finally.
+- C03B04: open/modos; texto vs binário (str/bytes + encoding); leitura/escrita; with; seek/tell; exceções de I/O; reprodutibilidade de notebooks com arquivos.
