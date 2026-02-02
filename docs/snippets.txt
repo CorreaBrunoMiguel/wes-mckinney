@@ -9,3 +9,10 @@
 <div style="border:2px solid #ffc107; padding:10px; background-color:#fff3cd; border-radius:5px;">
 ⚠️ <b>Aviso:</b> 
 </div>
+
+<figure>
+  <img src=""style="max-width:100%;">
+  <figcaption>
+    <b>Figura – </b> <br>
+  </figcaption>
+</figure>

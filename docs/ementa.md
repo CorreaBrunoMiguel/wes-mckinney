@@ -1,6 +1,18 @@
-# ementa.md (OFICIAL) — Capítulo 03
+# Ementa Geral (OFICIAL)
+
+last_updated: 2026-01-29
 
 Regra central de escopo: avaliações futuras só podem cobrar conteúdos registrados aqui (ementa oficial do capítulo) e/ou pré-requisitos explicitamente listados aqui.
+
+Como inserir novos blocos (B8)
+
+- O patch de um bloco deve começar em `### Bloco: CXXBYY — ...` e terminar no separador `---`.
+- Ao aplicar o patch, cole o novo bloco dentro do capítulo correspondente, acima do marcador `<!-- NEXT_BLOCK_CXX: ... -->` do capítulo.
+
+Sumário (capítulos e blocos)
+
+- C03: C03B01, C03B02, C03B03, C03B04
+- C04: C04B01
 
 ---
 
@@ -88,9 +100,10 @@ Tópicos e sub-tópicos
    - Merge in-place: update (sobrescreve chaves repetidas)
    - Construção a partir de sequências: dict(zip(keys, values)) e loop com zip
    - Armadilha do zip: trunca no menor comprimento
-2. Defaults e agregação por chave
-   - setdefault(k, default) para inicializar coleções acumuladoras
-   - collections.defaultdict(list) (criação automática ao acessar chave ausente; efeito colateral de criar entradas)
+2. Hashable
+   - O que significa ser “hashable”
+   - Por que listas/dicts/sets não podem ser chaves
+   - Tuplas como chaves (quando apropriado)
 3. Conjuntos (set)
    - Criação: set(iterável); literal {…}; set vazio: set()
    - Deduplicação e membership
@@ -100,6 +113,9 @@ Tópicos e sub-tópicos
    - List / set / dict comprehensions com filtro (if)
    - Comprehensions aninhadas (flatten + filtro)
    - Critérios de legibilidade: quando virar for explícito
+5. Agregação por chave
+   - dict.setdefault
+   - collections.defaultdict(list)
 
 Evidências (artefatos do bloco)
 
@@ -228,11 +244,80 @@ Observações de domínio
   - `tell/seek` em texto pode ser “opaco”; para offset em bytes, demonstrar em `rb`.
   - Declarar pré-requisitos evita “notebook funciona só na minha máquina”.
 
+<!-- NEXT_BLOCK_C03: C03B05 (se aplicável) -->
+
 ---
 
-## Conteúdos já aprendidos — consolidado até C03B04
+## Capítulo: C04 — Básico sobre o NumPy: arrays e processamento vetorizado
+
+### Bloco: C04B01 — O ndarray do NumPy (criação, dtypes, aritmética, indexação/slicing)
+
+Status: concluído em 2026-01-29
+
+Objetivos do bloco
+
+- Compreender o que é `ndarray` e suas propriedades principais (`ndim`, `shape`, `dtype`) e a restrição de homogeneidade.
+- Criar arrays via `np.array`, `np.asarray`, `np.zeros`, `np.ones`, `np.empty`, `np.arange` (incluindo formatos multidimensionais via tuplas).
+- Interpretar/selecionar `dtypes`; converter tipos com `astype` e entender truncamento e custos de cópia.
+- Realizar aritmética vetorizada e comparações elementwise; entender noções de broadcasting (principalmente escalar e atribuições em fatias).
+- Usar indexação e slicing em arrays 1D/2D/3D, entendendo “views” vs “copies”, e quando usar `.copy()`.
+
+Tópicos e sub-tópicos
+
+1. NumPy e vetorização
+   - Motivação: performance/memória; operações “em lote” sem `for`
+   - Convenção `import numpy as np`; evitar `from numpy import *` (colisões de namespace)
+2. `ndarray` (array N-dimensional)
+   - Dados homogêneos; metadados `dtype`
+   - Dimensionalidade e formato: `ndim`, `shape`
+3. Criação de arrays
+   - `np.array(seq)` e inferência de dtype
+   - Sequências aninhadas → array multidimensional
+   - `np.asarray` (não copia se a entrada já for `ndarray`)
+   - `np.zeros(shape[, dtype])`, `np.ones`, `np.empty` (valores não inicializados)
+   - `np.arange(start, stop, step[, dtype])`
+   - Funções \*\_like: `zeros_like`, `ones_like`, `empty_like`
+4. Tipos de dados (dtypes)
+   - Convenção de nomes (int/float + bits) e códigos de tipo
+   - Cast/conversão: `astype(...)` (sempre cria cópia)
+   - Truncamento de float → int
+   - Strings em NumPy: tamanho fixo (`numpy.string_`) e risco de truncamento
+5. Aritmética com arrays
+   - Operações elementwise entre arrays do mesmo `shape`
+   - Operações com escalares (broadcast)
+   - Comparações retornam arrays booleanos
+   - Operações com `shapes` distintos: conceito de broadcasting (referência ao apêndice)
+6. Indexação básica e fatiamento
+   - Indexação 1D; slices `start:stop:step`
+   - Atribuição em fatias: broadcast de escalar
+   - Slices são views; efeitos colaterais no array original
+   - Como obter cópia: `.copy()`
+   - 2D: acesso por linha; indexação com vírgula `arr[i, j]`
+   - 3D: redução de dimensão ao omitir índices finais; atribuições em subarrays
+
+Evidências (artefatos do bloco)
+
+- Notebook: C04B01.ipynb
+- Descritivas + respostas: C04B01_DESC.ipynb
+- Avaliação do bloco + respostas: C04B01_TEST.ipynb
+- Aula/revisão/avaliação/correções: geradas no chat (C04B01)
+
+Observações de domínio
+
+- Atenções recorrentes:
+  - `np.empty` pode conter “lixo” (memória não inicializada).
+  - Slices são views; use `.copy()` quando precisar isolar dados.
+  - `astype` sempre aloca um novo array (cópia).
+  - Casting float → int trunca a parte decimal.
+
+<!-- NEXT_BLOCK_C04: C04B02 -->
+
+---
+
+## Conteúdos já aprendidos — consolidado até C04B01
 
 - C03B01: tuplas vs listas; unpacking; operações e slicing de listas; enumerate/zip/reversed; bisect/insort.
 - C03B02: dict (get/pop/iteração/update); hashable; set (operações e membership); comprehensions; setdefault/defaultdict para agregação.
 - C03B03: LEGB e shadowing; funções como objetos (key=); lambda e critérios; partial; iterável vs iterador; geradores; itertools (groupby + ordenação); try/except/else/finally.
 - C03B04: open/modos; texto vs binário (str/bytes + encoding); leitura/escrita; with; seek/tell; exceções de I/O; reprodutibilidade de notebooks com arquivos.
+- C04B01: NumPy ndarray (ndim/shape/dtype); criação (array/asarray/arange/zeros/ones/empty e \*\_like); dtypes e casts (astype com cópia, truncamento, strings de tamanho fixo); aritmética vetorizada e comparações; noções de broadcasting; indexação e slicing (views vs copy; 1D/2D/3D).

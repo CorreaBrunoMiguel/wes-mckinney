@@ -13,10 +13,10 @@
     "chapter_block_aggregation": "mean_equal_weight"
   },
   "summary": {
-    "current_chapter": "C03",
+    "current_chapter": "C04",
     "overall": {
       "chapters_completed": 1,
-      "chapters_in_progress": 0
+      "chapters_in_progress": 1
     }
   },
   "chapters": {
@@ -93,6 +93,39 @@
         "block_grade": 82,
         "chapter_final_grade": 80,
         "last_updated": "2026-01-27"
+      }
+    },
+    "C04": {
+      "weights": {
+        "notebook": 0.25,
+        "descritivas": 0.3,
+        "avaliacao_bloco": 0.45
+      },
+      "blocks": {
+        "C04B01": {
+          "scores": {
+            "notebook": 80.45,
+            "descritivas": 88.75,
+            "avaliacao_bloco": 98.0,
+            "final_bloco": 91
+          },
+          "artifacts": {
+            "main": "C04B01.ipynb",
+            "desc": "C04B01_DESC.ipynb",
+            "test": "C04B01_TEST.ipynb"
+          },
+          "status": "done"
+        }
+      },
+      "chapter_exam": {
+        "score": null,
+        "status": "pending"
+      },
+      "computed": {
+        "block_count": 1,
+        "block_grade": 91,
+        "chapter_final_grade": null,
+        "last_updated": "2026-01-29"
       }
     }
   }
