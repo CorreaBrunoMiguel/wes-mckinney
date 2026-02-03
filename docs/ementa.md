@@ -12,7 +12,7 @@ Como inserir novos blocos (B8)
 Sumário (capítulos e blocos)
 
 - C03: C03B01, C03B02, C03B03, C03B04
-- C04: C04B01
+- C04: C04B01, C04B02
 
 ---
 
@@ -310,14 +310,67 @@ Observações de domínio
   - `astype` sempre aloca um novo array (cópia).
   - Casting float → int trunca a parte decimal.
 
-<!-- NEXT_BLOCK_C04: C04B02 -->
+### Bloco: C04B02 — Indexação avançada no NumPy (boolean/fancy) + transposição e eixos
+
+Status: concluído em 2026-02-02
+
+Objetivos do bloco
+
+- Consolidar slicing em 1D/2D (redução de dimensão, `start:stop:step`, step negativo) e impacto em view/cópia.
+- Filtrar arrays por indexação booleana (máscaras), combinando condições com `&`, `|`, `~` e uso obrigatório de parênteses.
+- Entender compatibilidade de máscara com o eixo indexado e aplicar atribuição via máscara (`A[mask] = ...`) com segurança.
+- Aplicar fancy indexing para seleção/reordenação e distinguir “seleção de linhas” vs “pares (i,j)” quando há duas listas no mesmo `[...]`.
+- Obter submatriz retangular (produto cartesiano rows×cols) via abordagem correta (`np.ix_` ou seleção em duas etapas).
+- Manipular eixos com `transpose`/`.T` e `swapaxes`, prevendo `shape` e aplicando em `dot`/`@`.
+
+Tópicos e sub-tópicos
+
+1. Slicing e dimensionalidade
+
+- `A[i]` vs `A[i:i+1]` (redução/preservação de dimensão)
+- step e slicing reverso (`[::-1]`) e implicações de strides/contiguidade
+
+2. Indexação booleana
+
+- máscaras elementwise; `A[mask]` retorna 1D dos elementos selecionados
+- compatibilidade de máscara com o eixo filtrado (incompatível → erro)
+- combinação de condições com `&`, `|`, `~` e precedência (parênteses obrigatórios)
+- atribuição via máscara e efeito no array original
+
+3. Fancy indexing (inteiros)
+
+- seleção/reordenação por listas/arrays de índices
+- duas listas no mesmo `[...]` ⇒ pares coordenados (zip) ⇒ resultado 1D
+- submatriz retangular: produto cartesiano rows×cols (`np.ix_` / duas etapas)
+
+4. Transposição e eixos
+
+- `A.T`/`transpose()` em 2D; `transpose(order)` em nD (permutação de eixos)
+- `swapaxes(i,j)` para troca pontual
+- compatibilidade de shapes em `dot`/`@` (colunas do 1º = linhas do 2º)
+
+Evidências (artefatos do bloco)
+
+- Notebook: C04B02.ipynb
+- Descritivas + respostas: C04B02_DESC.ipynb
+- Avaliação do bloco + respostas: C04B02_TEST.ipynb
+- Aula/revisão/avaliação/correções: geradas no chat (C04B02)
+
+Observações de domínio
+
+- Atenções recorrentes:
+  - Máscara booleana deve ser compatível com o eixo filtrado (incompatível → erro).
+  - Em fancy indexing 2D, `A[rows, cols]` seleciona pares (row_i, col_i), não uma submatriz.
+  - Para submatriz retangular, usar produto cartesiano (`np.ix_`) ou seleção em duas etapas.
+  - Slicing reverso tende a ser view, mas frequentemente não é contíguo (strides negativos).
 
 ---
 
-## Conteúdos já aprendidos — consolidado até C04B01
+## Conteúdos já aprendidos — consolidado até C04B02
 
 - C03B01: tuplas vs listas; unpacking; operações e slicing de listas; enumerate/zip/reversed; bisect/insort.
 - C03B02: dict (get/pop/iteração/update); hashable; set (operações e membership); comprehensions; setdefault/defaultdict para agregação.
 - C03B03: LEGB e shadowing; funções como objetos (key=); lambda e critérios; partial; iterável vs iterador; geradores; itertools (groupby + ordenação); try/except/else/finally.
 - C03B04: open/modos; texto vs binário (str/bytes + encoding); leitura/escrita; with; seek/tell; exceções de I/O; reprodutibilidade de notebooks com arquivos.
 - C04B01: NumPy ndarray (ndim/shape/dtype); criação (array/asarray/arange/zeros/ones/empty e \*\_like); dtypes e casts (astype com cópia, truncamento, strings de tamanho fixo); aritmética vetorizada e comparações; noções de broadcasting; indexação e slicing (views vs copy; 1D/2D/3D).
+  `- C04B02: slicing avançado (dimensionalidade, step e reverso); indexação booleana (máscaras compatíveis, &/|/~ e parênteses, atribuição); fancy indexing 2D (linhas vs pares (i,j), submatriz retangular com rows×cols); transpose/swapaxes e impacto em shape; compatibilidade em dot/@.`

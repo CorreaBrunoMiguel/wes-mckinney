@@ -85,14 +85,18 @@
         }
       },
       "chapter_exam": {
-        "score": 77,
-        "status": "done"
+        "status": "done",
+        "score": 87,
+        "artifacts": {
+          "project": "C03_PROJECT.ipynb",
+          "result": "C03_RESULT.md"
+        }
       },
       "computed": {
         "block_count": 4,
         "block_grade": 82,
-        "chapter_final_grade": 80,
-        "last_updated": "2026-01-27"
+        "chapter_final_grade": 85,
+        "last_updated": "2026-01-29"
       }
     },
     "C04": {
@@ -115,17 +119,35 @@
             "test": "C04B01_TEST.ipynb"
           },
           "status": "done"
+        },
+        "C04B02": {
+          "scores": {
+            "notebook": 82,
+            "descritivas": 62,
+            "avaliacao_bloco": 73,
+            "final_bloco": 72
+          },
+          "artifacts": {
+            "main": "C04B02.ipynb",
+            "desc": "C04B02_DESC.ipynb",
+            "test": "C04B02_TEST.ipynb"
+          },
+          "status": "done"
         }
       },
       "chapter_exam": {
+        "status": "pending",
         "score": null,
-        "status": "pending"
+        "artifacts": {
+          "project": null,
+          "result": null
+        }
       },
       "computed": {
-        "block_count": 1,
-        "block_grade": 91,
+        "block_count": 2,
+        "block_grade": 82,
         "chapter_final_grade": null,
-        "last_updated": "2026-01-29"
+        "last_updated": "2026-02-02"
       }
     }
   }

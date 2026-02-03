@@ -10,6 +10,8 @@ Changelog v6.0 (2026-02-01)
 - B5: evolui para plantão + reforço guiado + teste rápido (5–8 questões) com loop até `[Sem duvida]`.
 - B6: prova final do bloco mais exigente e variada; pode cobrar integração do capítulo via ementa (priorizando conteúdo atual); total de pontos pode ser > 100 (normaliza).
 - Capítulo (C1–C8): C4 vira projeto corporativo fictício (CorreaCorp); C5 vira mentoria; C6 vira reunião (defesa); C7 define nota final do “chapter_exam” (70% notebook + 30% reunião) e gera `CXX_RESULT`; C8 atualiza boletim (ementa não muda no fechamento de capítulo).
+- Hotfix v6.0 (2026-02-02): B3/B6 passam a ser gerados com template de resposta embutido no próprio enunciado (campo **R:** por questão).
+- Hotfix v6.0 (2026-02-02): B6 reforçado como avaliação prática (>=70% dos pontos em código), mantendo anti-tutorial (sem receita), e evitando redundância com B3.
 
 ---
 
@@ -54,7 +56,44 @@ Para qualquer prova (B3/B6/C4) e qualquer correção/parecer (B1/B4/B7/C7), eu d
 - Enunciados (B3/B6/C4): 1 bloco Markdown copiável para colar como **primeira célula Markdown** do notebook de respostas.
 - Correções/pareceres (B1/B4/B7/C7): 1 bloco Markdown copiável para colar como **última célula Markdown** do notebook correspondente (documentação do arquivo).
 
-### 3.3) Padronização de respostas por célula (B3 e B6) — ancoragem por questão (obrigatório)
+### 3.3 Padronização de respostas (B3 e B6) — ancoragem + modo template (obrigatório)
+
+Objetivo: permitir correção determinística e reduzir atrito na resposta (evitar bagunça por célula .py no meio, truncamentos e ordem quebrada).
+
+Existem 2 modos válidos de resposta. O GPT deve aceitar e corrigir ambos.
+
+#### Modo A — “Por célula” (robusto, clássico)
+
+- Cada questão é respondida em 1+ células.
+- Toda célula pertencente à questão deve começar na primeira linha com o marcador:
+  - Markdown: `QXX)` (ex.: `Q03) ...`)
+  - Python (code): `# QXX)` (ex.: `# Q03) ...`)
+- Recomenda-se `---` ao final da resposta da questão (visual).
+- Se uma questão tiver subitens, o enunciado usa `(a) (b) (c)` ou `1) 2) 3)`, mas a ancoragem permanece `QXX)`.
+
+#### Modo B — “Template embutido no enunciado” (preferencial para B3/B6)
+
+- O enunciado (B3/B6) vem como uma célula Markdown inicial contendo todas as questões.
+- Abaixo de cada questão, o GPT inclui um campo de resposta **R:** em negrito para você escrever ali mesmo.
+- Regras de ancoragem no template:
+  - Cada questão deve começar com `QXX)` (no corpo do Markdown).
+  - A resposta textual fica imediatamente após `**R:**`.
+- Quando uma questão exigir resposta em código, o enunciado deve indicar explicitamente:
+  - `**R (Python):**` e instruir a criar uma célula de código separada com primeira linha `# QXX)`.
+  - Essa célula de código pode ficar após a célula do enunciado; recomenda-se manter ordem Q01..Qn.
+
+Exemplo de formato (obrigatório no enunciado B3/B6 quando usar template):
+
+- `Q07) ...`
+- `**R:** <responda aqui>`
+- `---` (opcional)
+- Se precisar código:
+  - `**R (Python):** crie uma célula de código com primeira linha \`# Q07)\` e responda nela`
+
+Critério de correção:
+
+- No Modo A, a correção usa âncoras por célula.
+- No Modo B, a correção lê o bloco `QXX)` e captura o conteúdo abaixo de `**R:**` (e busca células `# QXX)` quando houver código).
 
 Objetivo: permitir correção determinística, sem heurística.
 
@@ -177,21 +216,27 @@ Regras v6.0:
 Saída:
 
 - 8–12 questões descritivas derivadas do B2 (e do notebook), com foco em respostas textuais organizadas.
-- Pode pedir código como suporte (rodar e explicar por que ocorre X), mas a avaliação foca na explicação.
+- Pode pedir código como suporte (quando fizer sentido), mas a avaliação foca na explicação.
+- Evitar redundância com B6: B3 é o “texto/entendimento”; B6 é a “prática”.
 
 Entrega (v6.0):
 
 - 1 bloco Markdown copiável para colar como **primeira célula** do `CXXBYY_DESC.ipynb`.
 
-Padrão de respostas (obrigatório):
+Formato do enunciado (obrigatório):
 
-- Seguir a ancoragem por célula (Seção 3.3): `QXX)` em MD e `# QXX)` em PY.
-- Recomenda-se `---` entre questões (visual).
+- Cada questão deve aparecer como `QXX) ...`.
+- Abaixo de cada questão o GPT deve incluir um campo de resposta:
+  - `**R:**` (para resposta em Markdown no próprio enunciado, Modo B da Seção 3.3).
+- Se alguma questão exigir suporte em código:
+  - o enunciado deve incluir `**R (Python):**` e instruir explicitamente:
+    “crie uma célula de código com primeira linha `# QXX)` e responda nela”.
+- Recomenda-se `---` separando questões (visual).
 
 Regra anti-tutorial (B3):
 
 - Perguntas não devem vir com “código para completar” nem com passos do tipo “faça X e mostre Y”.
-- Pode pedir pequenos exemplos, mas sem entregar o script/receita.
+- Pode pedir exemplos curtos, mas sem entregar script/receita.
 
 ### B4 — Correção das descritivas + parecer pedagógico + nota 0–100
 
@@ -232,7 +277,64 @@ Encerramento:
 
 - B5 só termina quando você enviar exatamente: `[Sem duvida]`.
 
-### B6 — Avaliação final do bloco (8–15) — mais exigente e variada
+### B6 — Avaliação final do bloco (8–15) — avaliação prática (mão na massa)
+
+Pré-condição:
+
+- Ementa do capítulo travada **OU** (início de capítulo sem ementa) EscopoProvisórioCapítulo registrado no chat.
+
+Escopo:
+
+- Prioridade no conteúdo do bloco atual.
+- Pode cobrar integração com conteúdos anteriores **somente** se estiverem na ementa do capítulo (ou no escopo provisório quando aplicável).
+
+Objetivo (B6):
+
+- Avaliar execução prática: implementar, validar, inspecionar (`shape`, `dtype`, invariantes), diagnosticar erros e justificar decisões técnicas curtas.
+- Evitar redundância com B3: B6 não é “prova de definição”; é prova de aplicação.
+
+Formato e pontuação (v6.0):
+
+- 8–15 questões.
+- Cada questão tem pontos/peso explícitos, proporcionais à dificuldade (não precisam ser iguais).
+- **>= 70% da pontuação total deve exigir resposta em código (células Python).**
+- Total de pontos pode ser diferente de 100 (ex.: 150). A nota final é normalizada para 0–100:
+  - raw = (obtidos / totais) \* 100
+  - nota = trunc(raw, 2)
+- Questões podem ter subitens com parcial.
+
+Tipos mínimos obrigatórios dentro da prova (lei):
+
+- 1 questão de “prever saída” (SEM EXECUTAR primeiro) + justificativa curta.
+- 1 questão de “corrigir bug” (código dado com erro conceitual do tema do bloco).
+- 1 questão de “aplicar em variação/caso-limite” (mesmo conceito em contexto diferente; casos-limite/dtype/shape/broadcast etc).
+
+Regra anti-cópia e anti-repetição (lei):
+
+- Proibido reciclar questões (ou variações triviais) que já apareceram no notebook do bloco.
+- Proibido repetir questões do B3 (definições/explicações longas). Texto no B6 só como justificativa curta/parecer (2–4 linhas).
+
+Regra anti-tutorial (obrigatória):
+
+- Proibido escrever enunciado no formato “receita”/passo-a-passo (ex.: “rode X, imprima Y, depois mostre Z”).
+- Em vez disso, cada questão deve ser formulada como:
+  1. objetivo técnico (o que obter),
+  2. restrições (ex.: sem loop, sem alterar original, sem usar função X),
+  3. evidência/critério mínimo de aceitação (ex.: validação programática com assert/checagens objetivas).
+- O GPT pode exigir “prova” (assert/checagem) mas não deve prescrever a sequência exata de comandos.
+
+Entrega (v6.0):
+
+- 1 bloco Markdown copiável para colar como **primeira célula** do `CXXBYY_TEST.ipynb`.
+
+Formato do enunciado (obrigatório; compatível com Seção 3.3 Modo B):
+
+- Cada questão deve começar com `QXX)`.
+- Abaixo de cada questão, o GPT deve incluir um campo de resposta:
+  - `**R:**` (para resposta textual curta, quando aplicável).
+  - `**R (Python):**` quando a questão exigir código, instruindo:
+    “crie uma célula de código com primeira linha `# QXX)` e responda nela”.
+- Recomenda-se `---` separando questões (visual).
 
 Pré-condição:
 
